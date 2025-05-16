@@ -1,0 +1,135 @@
+@import 'src/styles.scss';
+
+.animated-banner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	background-color: #f5f2ea;
+	border-radius: 1.5rem;
+	overflow: hidden;
+	margin: 6rem auto 4rem;
+	padding-top: 2rem; // добавлен верхний отступ
+	max-width: 1200px;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+	transition: all 0.5s ease;
+
+	&:hover {
+		box-shadow: 0 30px 80px rgba(188, 155, 106, 0.3);
+		transform: translateY(-5px);
+	}
+
+	.banner-content {
+		flex: 1;
+		padding: 3rem 3rem;
+		color: #2e2e2e;
+		min-width: 320px;
+
+		.title {
+			font-size: 2.5rem;
+			font-weight: 700;
+			color: #bc9b6a;
+			margin-bottom: 1rem;
+		}
+
+		.subtitle {
+			font-size: 1.1rem;
+			margin-bottom: 2rem;
+			color: #2e2e2e;
+			line-height: 1.6;
+		}
+	}
+
+	.banner-visual {
+		flex: 1.2;
+		min-height: 320px;
+		position: relative;
+		background: radial-gradient(
+				circle at 30% 30%,
+				rgba(188, 155, 106, 0.2),
+				transparent 70%
+			),
+			url('/assets/mdf.png') center/cover no-repeat;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.floating-blob {
+			position: absolute;
+			width: 180px;
+			height: 180px;
+			background: rgba(188, 155, 106, 0.25);
+			border-radius: 50%;
+			animation: blobFloat 6s ease-in-out infinite;
+			filter: blur(30px);
+		}
+
+		.highlight-circle {
+			position: absolute;
+			width: 220px;
+			height: 220px;
+			border: 2px solid #bc9b6a;
+			border-radius: 50%;
+			animation: pulseCircle 3s ease-in-out infinite;
+			opacity: 0.5;
+		}
+	}
+
+	// 🔽 Mobile адаптация
+	@media (max-width: 768px) {
+		flex-direction: column;
+		margin-left: 1rem;
+		margin-right: 1rem;
+		padding: 0;
+
+		.banner-content {
+			padding: 2rem 1rem;
+			text-align: center;
+
+			.title {
+				font-size: 2rem;
+			}
+
+			.subtitle {
+				font-size: 1rem;
+			}
+		}
+
+		.banner-visual {
+			width: 100%;
+			min-height: 240px;
+			background-position: center center;
+
+			.floating-blob,
+			.highlight-circle {
+				display: none;
+			}
+		}
+	}
+}
+
+// Animations
+@keyframes blobFloat {
+	0%,
+	100% {
+		transform: translateY(0) scale(1);
+	}
+	50% {
+		transform: translateY(-15px) scale(1.05);
+	}
+}
+
+@keyframes pulseCircle {
+	0% {
+		transform: scale(1);
+		opacity: 0.6;
+	}
+	50% {
+		transform: scale(1.1);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 0.6;
+	}
+}

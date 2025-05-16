@@ -1,0 +1,415 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'swiper/css';
+@import 'swiper/css/pagination';
+@import 'swiper/css/navigation';
+@import 'swiper/swiper-bundle.css';
+
+// 🎨 Цвета
+$primary-bg: #f5f2ea;
+$primary-text: #2e2e2e;
+$accent: #bc9b6a;
+$light-gray: #e5e5e5;
+$mid-gray: #cccccc;
+
+// 🌙 Тёмная тема
+$primary-bg-dark: #2e2e2e;
+$primary-text-dark: #bc9b6a;
+$accent-dark: #bc9b6a;
+
+// Типографика
+$text-title: 2rem;
+$text-subtitle: 1.25rem;
+$text-body: 1rem;
+
+// 🌍 Глобальные стили
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: 'Inter', sans-serif;
+	background-color: $primary-bg;
+	color: $primary-text;
+	scroll-behavior: smooth;
+
+	&.dark {
+		background-color: $primary-bg-dark;
+		color: $primary-text-dark;
+	}
+}
+
+section {
+	position: relative;
+	padding: 5rem 1rem;
+}
+
+h2 {
+	font-size: $text-title;
+	font-weight: 700;
+	margin-bottom: 2rem;
+	color: $accent;
+
+	&:hover {
+		text-shadow: 0 0 8px rgba(188, 155, 106, 0.4);
+		transition: all 0.4s ease;
+	}
+}
+
+// Switch Dark/Light
+.theme-toggle-button {
+	position: relative;
+	width: 86px;
+	height: 44px;
+	background: linear-gradient(145deg, #bc9b6a, #a57d4c);
+	border-radius: 9999px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 12px;
+	box-shadow: 0 6px 20px rgba(188, 155, 106, 0.35);
+	transition: all 0.4s ease;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: 20px;
+
+	.icon {
+		z-index: 2;
+		color: white;
+		transition: transform 0.4s ease, opacity 0.4s ease;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		svg {
+			filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
+			transition: all 0.4s ease;
+		}
+	}
+
+	.sun {
+		opacity: 1;
+		transform: translateX(0);
+		margin-left: -1px;
+	}
+
+	.moon {
+		opacity: 0;
+		transform: translateX(20px);
+	}
+
+	.toggle-indicator {
+		position: absolute;
+		width: 36px;
+		height: 36px;
+		top: 4px;
+		left: 4px;
+		border-radius: 50%;
+		background: radial-gradient(circle at 30% 30%, #ffdf9f, #bc9b6a);
+		box-shadow: 0 0 10px rgba(255, 204, 128, 0.4),
+			0 0 20px rgba(255, 204, 128, 0.3);
+		transition: all 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+		z-index: 1;
+	}
+
+	&.dark {
+		background: linear-gradient(145deg, #2e2e2e, #1a1a1a);
+
+		.sun {
+			opacity: 0;
+			transform: translateX(-20px);
+		}
+
+		.moon {
+			opacity: 1;
+			transform: translateX(0);
+		}
+
+		.toggle-indicator {
+			left: calc(100% - 40px);
+			background: radial-gradient(circle at 35% 35%, #f6b042, #bc9b6a);
+			box-shadow: 0 0 12px rgba(255, 153, 0, 0.6),
+				0 0 30px rgba(255, 153, 0, 0.3), 0 0 8px #f6b042 inset;
+			filter: brightness(1.2) blur(0.2px);
+			transform: scale(1.05);
+		}
+	}
+}
+
+// 🔁 Анимации
+@keyframes logoEntrance {
+	0% {
+		opacity: 0;
+		transform: scale(0.6) rotate(-20deg);
+		filter: blur(10px);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.1) rotate(3deg);
+		filter: blur(0);
+	}
+	100% {
+		transform: scale(1) rotate(0);
+	}
+}
+
+@keyframes fadeUp {
+	0% {
+		opacity: 0;
+		transform: translateY(60px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeDown {
+	0% {
+		opacity: 0;
+		transform: translateY(-60px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeLeft {
+	0% {
+		opacity: 0;
+		transform: translateX(-60px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes fadeRight {
+	0% {
+		opacity: 0;
+		transform: translateX(60px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes slowPulse {
+	0%,
+	100% {
+		opacity: 0.15;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 0.3;
+		transform: scale(1.05);
+	}
+}
+
+.animate-logo-entrance {
+	animation: logoEntrance 1.8s ease-out forwards;
+}
+.animate-fade-up {
+	animation: fadeUp 1.3s ease-out forwards;
+}
+.animate-fade-down {
+	animation: fadeDown 1.3s ease-out forwards;
+}
+.animate-fade-left {
+	animation: fadeLeft 1.3s ease-out forwards;
+}
+.animate-fade-right {
+	animation: fadeRight 1.3s ease-out forwards;
+}
+.animate-slow-pulse {
+	animation: slowPulse 12s ease-in-out infinite;
+}
+
+// 🔘 Кнопки
+.btn-futuristic {
+	display: inline-block;
+	padding: 0.75rem 2rem;
+	border-radius: 9999px;
+	font-weight: 600;
+	font-size: 1rem;
+	position: relative;
+	overflow: hidden;
+	background-color: $accent;
+	color: $primary-bg;
+	transform: scale(1);
+	box-shadow: 0 4px 14px rgba($accent, 0.3);
+	transition: background-color 0.4s ease, transform 0.4s ease,
+		box-shadow 0.4s ease, color 0.3s ease;
+
+	// Сияющая вспышка
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(
+			120deg,
+			rgba(255, 255, 255, 0.15),
+			rgba(255, 255, 255, 0.4),
+			rgba(255, 255, 255, 0.15)
+		);
+		transform: skewX(-20deg);
+		transition: left 0.6s ease;
+		z-index: 1;
+	}
+
+	&:hover {
+		transform: scale(1.05) translateY(-2px);
+		box-shadow: 0 10px 28px rgba($accent, 0.4), 0 0 8px rgba($accent, 0.2);
+		background-color: lighten($accent, 4%);
+	}
+
+	&:hover::before {
+		left: 120%;
+	}
+
+	&:active {
+		transform: scale(0.97);
+	}
+
+	z-index: 2;
+	text-align: center;
+
+	// Для тёмной темы
+	.dark & {
+		background-color: $accent-dark;
+		color: $primary-text-dark;
+	}
+
+	// Текст поверх псевдоэлемента
+	z-index: 2;
+	text-align: center;
+}
+
+// 📦 Карточки
+.card-hover {
+	transition: transform 0.4s ease, box-shadow 0.4s ease,
+		background-color 0.4s ease, color 0.4s ease;
+
+	&:hover {
+		transform: scale(1.04) translateY(-4px);
+		box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 0 30px rgba($accent, 0.05);
+	}
+	.dark & {
+		color: $accent-dark;
+	}
+	.dark &:hover {
+		background-color: $accent-dark;
+		color: $primary-bg;
+		box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1),
+			0 0 30px rgba($accent-dark, 0.1);
+	}
+}
+
+// 📄 Формы
+form input,
+form textarea {
+	border-radius: 0.5rem;
+	border: 1px solid $light-gray;
+	padding: 1rem;
+	font-size: $text-body;
+	width: 100%;
+	transition: all 0.3s ease;
+
+	&:focus {
+		outline: none;
+		border-color: $accent;
+		box-shadow: 0 0 0 4px rgba(188, 155, 106, 0.3);
+	}
+}
+
+// 🧭 Навигация
+
+.custom-header {
+	@media (min-width: 767px) {
+		display: flex !important;
+	}
+}
+
+.nav-link {
+	position: relative;
+	color: $primary-text;
+	font-weight: 500;
+	transition: color 0.3s ease;
+
+	&:hover {
+		color: $accent;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: -2px;
+		left: 0;
+		height: 2px;
+		width: 0%;
+		background-color: $accent;
+		transition: width 0.3s ease;
+	}
+
+	&:hover::after {
+		width: 100%;
+	}
+}
+
+// ⚙️ Доп. стили
+a:hover {
+	transition: color 0.3s ease;
+}
+
+.group:hover img {
+	transform: scale(1.12) rotate(1.2deg);
+	transition: transform 0.5s ease;
+}
+
+// 🧩 Swiper
+swiper {
+	padding-bottom: 3rem;
+	.text-muted-dark {
+		color: $accent-dark;
+	}
+	.swiper-pagination-bullet {
+		background-color: $accent;
+		opacity: 0.5;
+		transition: all 0.3s ease;
+	}
+
+	.swiper-pagination-bullet-active {
+		opacity: 1;
+		transform: scale(1.3);
+		box-shadow: 0 0 8px rgba($accent, 0.4);
+		background: #bc9b6a !important;
+	}
+}
+
+// 🦶 Футер
+footer {
+	a {
+		transition: color 0.3s ease;
+
+		&:hover {
+			color: $accent;
+		}
+	}
+
+	i {
+		transition: transform 0.3s ease;
+
+		&:hover {
+			transform: scale(1.2) rotate(3deg);
+		}
+	}
+}

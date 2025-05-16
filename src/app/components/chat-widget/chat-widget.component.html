@@ -1,0 +1,21 @@
+<div class="chat-widget" [class.open]="isOpen">
+  <!-- Кнопка -->
+  <button class="chat-button" (click)="toggleChat()">
+    💬
+    <span class="tooltip">Вам нужна помощь?</span>
+  </button>
+
+  <!-- Модальное окно -->
+  <div class="chat-popup">
+    <div class="chat-header">
+      <span>Связаться с нами</span>
+      <button class="close-btn" (click)="toggleChat()">×</button>
+    </div>
+    <div class="chat-body">
+      <input type="text" placeholder="Ваше имя" />
+      <input type="email" placeholder="Email или телефон" />
+      <textarea placeholder="Ваш вопрос" rows="3"></textarea>
+      <button class="send-btn">Отправить</button>
+    </div>
+  </div>
+</div>
