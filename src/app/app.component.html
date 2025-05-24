@@ -1,13 +1,9 @@
 <!-- HEADER -->
 <header
-	class="fixed top-0 left-0 w-full z-50 border-b border-[rgba(188,155,106,0.3)] transition-all duration-500 ease-in-out"
+	class="fixed top-0 left-0 w-full z-50 border-b border-[rgba(188,155,106,0.3)] transition-all duration-500 ease-in-out backdrop-blur-2xl bg-[rgba(245,242,234,0.65)] saturate-[1.2]"
 	[ngClass]="{
 		'py-2 shadow-md': scrolled,
-		'py-5': !scrolled,
-		'backdrop-blur-2xl bg-[rgba(245,242,234,0.65)] saturate-[1.2]':
-			screenWidth > 768,
-		'backdrop-blur-md bg-[rgba(245,242,234,0.65)] saturate-[1.1]':
-			screenWidth <= 768
+		'py-5': !scrolled
 	}"
 >
 	<div class="max-w-7xl mx-auto flex items-center justify-between px-6">
